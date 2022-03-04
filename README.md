@@ -3,6 +3,7 @@
 ## Oculus Quest 2 Develop in Unity Study
 ### Unity setup
 Use the traditional 3D platform, nor URP or WURP
+https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 ### Passthrough API Setup
 * Add OVR Passthrough Layer in OVRCameraRig or its paraent.
   * Keep the placement of OVerlay  
