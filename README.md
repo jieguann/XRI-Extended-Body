@@ -24,3 +24,6 @@
 ### Limitation 
 *  The Mixed Reality experience is Black and White because of the limitation of the Cemera on the device.
 *  Tracking, only keyboard could be used to anchor virtual object persistently. The controller will disable when put down and it can not use together with hand tracking.
+
+### Comparare to Other device
+Price
