@@ -1,6 +1,8 @@
 # Thesis-FinalPrototype-OculusQuest2-MR
 
 ## Oculus Quest 2 Develop in Unity Study
+### Unity setup
+Use the traditional 3D platform, nor URP or WURP
 ### Passthrough API Setup
 * Add OVR Passthrough Layer in OVRCameraRig or its paraent.
   * Keep the placement of OVerlay  
