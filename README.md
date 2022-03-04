@@ -14,7 +14,10 @@
   * Build with Android and run in Oculus Quest 2, and stream with sideQuest.<br>https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 
 ### Hand Tracking Interaction
-
+* Basic Grab
+  * Pinch Grab
+  * Palm Grab
+  * Combination
 ### Limitation 
 Black and white
 Tracking, only keyboard to anchor virtual object, the controller disable when put down
