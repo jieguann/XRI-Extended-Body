@@ -18,6 +18,9 @@
   * Pinch Grab
   * Palm Grab
   * Combination
+* Hand Pose (Gesture)
+  * Stop - Open five fingers
+  * Scissors - Shake hand
 ### Limitation 
-Black and white
-Tracking, only keyboard to anchor virtual object, the controller disable when put down
+*  The Mixed Reality experience is Black and White because of the limitation of the Cemera on the device.
+*  Tracking, only keyboard could be used to anchor virtual object persistently. The controller will disable when put down and it can not use together with hand tracking.
