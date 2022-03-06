@@ -8,23 +8,30 @@ public class triggerLight : MonoBehaviour
     public lightControl control;
     public float x;
     public float y;
+    public bool TriggerFlag;
+
+    void Start()
+    {
+        TriggerFlag = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-
+        if(TriggerFlag == true)
+        {
+             StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255)); 
+        }
+        TriggerFlag = false;
         
-            
-            StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255));
-            
-
-           
-
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
-        //bri is between 0 - 255
-        StartCoroutine(control.HttpPutLight(1f, 0.5f, 0.5f, 255));
-        
+        if (TriggerFlag == false)
+        {
+            //bri is between 0 - 255
+            StartCoroutine(control.HttpPutLight(1f, 1f, 0.5f, 0));
+        }
+        TriggerFlag = true;
     }
 }
