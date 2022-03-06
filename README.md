@@ -31,3 +31,14 @@ https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 
 ### Comparare to Other device
 Price
+
+
+
+
+## Philip Hue Color Control
+
+Similar to prototype 2, http put
+
+rgb to xy
+
+
