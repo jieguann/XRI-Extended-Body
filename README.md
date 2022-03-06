@@ -41,4 +41,6 @@ Similar to prototype 2, http put
 
 rgb to xy
 
+## The Interaction with the physical environment
+### Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
 
