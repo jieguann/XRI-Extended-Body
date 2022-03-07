@@ -21,6 +21,8 @@ public class JoystickControll : MonoBehaviour
     private float sideToSideTilt = 0;
     private float sideToSideTiltNormalnized;
 
+    public Transform controlObject;
+
     private void Start()
     {   //get spaceship rigibody
         spaceship = gameManager.spaceship.transform;
@@ -95,8 +97,20 @@ public class JoystickControll : MonoBehaviour
             //spaceship.velocity = spaceship.velocity * 0.99f;
             //rocketBody.drag = 50;
         }
+
+        transform.LookAt(topOfJoystick.position, transform.up);
+
     }
 
+    /*
+    public void joystickerCOntrollerOnSelect()
+    {
+        transform.LookAt(controlObject.transform.position, transform.up);
+    }
+    */
+
+
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("PlayerHand"))
@@ -118,7 +132,7 @@ public class JoystickControll : MonoBehaviour
             sideToSideTiltNormalnized = 0f;
         }
     }
-
+    */
     //Remap range
     float map(float s, float a1, float a2, float b1, float b2)
     {
