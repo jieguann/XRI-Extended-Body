@@ -12,6 +12,7 @@ public class lightControl : MonoBehaviour
     {
         public int bri;
         public float[] xy;
+        public bool on;
 
     }
     LightJson lightValue = new LightJson();
@@ -24,7 +25,7 @@ public class lightControl : MonoBehaviour
     }
 
     //Access this for other to control light
-    public IEnumerator HttpPutLight(float r, float g, float b, int bri)
+    public IEnumerator HttpPutLight(float r, float g, float b, int bri,bool on)
     {   //picker.GetComponent<Renderer>().material.color = other.GetComponent<Renderer>().material.color;
         Color col = new Color(r, g, b, 1);
         pb_XYZ_Color xyz = pb_XYZ_Color.FromRGB(col);
@@ -41,6 +42,7 @@ public class lightControl : MonoBehaviour
         lightValue.xy[0] = x;
         lightValue.xy[1] = y;
         lightValue.bri = bri;
+        lightValue.on = on;
         updateLight();
         //picker.b = false;
 

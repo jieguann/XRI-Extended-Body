@@ -6,7 +6,7 @@ public class Planet : MonoBehaviour
 {
     public Transform landingSpot;
     public bool hasLanded;
-    public string landingButton;
+    //public string landingButton;
     public bool inLandingZone;
     public Transform player;
     public GameManager gameManager;
