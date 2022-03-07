@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: be82ed91d57866940b940e7ce52be851
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Door_01_Left
+    100002: Door_01_Right
+    100004: GunnerControls
+    100006: GunnerSeat
+    100008: GunnerSeatSupportSection_01
+    100010: GunnerSeatSupportSection_02
+    100012: GunnerSeatSupportSection_03
+    100014: GunnerSeatSupportSection_04
+    100016: Hatch_Interior_Front
+    100018: Hatch_Interior_Rear
+    100020: Hull_Interior
+    100022: Hull_Interior_Collision
+    100024: Ladder_01
+    100026: LadderHinges
+    100028: PilotSeat
+    100030: //RootNode
+    100032: Windows_Interior
+    100034: Yoke
+    400000: Door_01_Left
+    400002: Door_01_Right
+    400004: GunnerControls
+    400006: GunnerSeat
+    400008: GunnerSeatSupportSection_01
+    400010: GunnerSeatSupportSection_02
+    400012: GunnerSeatSupportSection_03
+    400014: GunnerSeatSupportSection_04
+    400016: Hatch_Interior_Front
+    400018: Hatch_Interior_Rear
+    400020: Hull_Interior
+    400022: Hull_Interior_Collision
+    400024: Ladder_01
+    400026: LadderHinges
+    400028: PilotSeat
+    400030: //RootNode
+    400032: Windows_Interior
+    400034: Yoke
+    2100000: SpaceshipInterior_01C
+    2100002: SpaceshipInterior_01A
+    2100004: SpaceshipInterior_01D
+    2100006: SpaceshipInterior_01B
+    2100008: SpaceshipInterior_01E
+    2100010: SpaceshipExterior_01A
+    2100012: Windows
+    2300000: Door_01_Left
+    2300002: Door_01_Right
+    2300004: GunnerControls
+    2300006: GunnerSeat
+    2300008: GunnerSeatSupportSection_01
+    2300010: GunnerSeatSupportSection_02
+    2300012: GunnerSeatSupportSection_03
+    2300014: GunnerSeatSupportSection_04
+    2300016: Hatch_Interior_Front
+    2300018: Hatch_Interior_Rear
+    2300020: Hull_Interior
+    2300022: Hull_Interior_Collision
+    2300024: Ladder_01
+    2300026: LadderHinges
+    2300028: PilotSeat
+    2300030: Windows_Interior
+    2300032: Yoke
+    3300000: Door_01_Left
+    3300002: Door_01_Right
+    3300004: GunnerControls
+    3300006: GunnerSeat
+    3300008: GunnerSeatSupportSection_01
+    3300010: GunnerSeatSupportSection_02
+    3300012: GunnerSeatSupportSection_03
+    3300014: GunnerSeatSupportSection_04
+    3300016: Hatch_Interior_Front
+    3300018: Hatch_Interior_Rear
+    3300020: Hull_Interior
+    3300022: Hull_Interior_Collision
+    3300024: Ladder_01
+    3300026: LadderHinges
+    3300028: PilotSeat
+    3300030: Windows_Interior
+    3300032: Yoke
+    4300000: Hull_Interior
+    4300002: LadderHinges
+    4300004: Ladder_01
+    4300006: GunnerControls
+    4300008: Hatch_Interior_Rear
+    4300010: Hatch_Interior_Front
+    4300012: Door_01_Left
+    4300014: Door_01_Right
+    4300016: GunnerSeatSupportSection_01
+    4300018: GunnerSeatSupportSection_02
+    4300020: GunnerSeatSupportSection_03
+    4300022: GunnerSeatSupportSection_04
+    4300024: GunnerSeat
+    4300026: Yoke
+    4300028: PilotSeat
+    4300030: Windows_Interior
+    4300032: Hull_Interior_Collision
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipExterior_01A
+    second: {fileID: 2100000, guid: 088098bdbee89894886ed74628b8f70e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipInterior_01A
+    second: {fileID: 2100000, guid: a1ff9651652ad2e47a878708d706608c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipInterior_01B
+    second: {fileID: 2100000, guid: e15250fed5c00d34bbd815369d47d449, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipInterior_01C
+    second: {fileID: 2100000, guid: 80d03bf38015d2b4ea0fa34a0048390d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipInterior_01D
+    second: {fileID: 2100000, guid: cb17bf9a679288d4284959a3e47a0342, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceshipInterior_01E
+    second: {fileID: 2100000, guid: 36a109fc17347fa4eb9fd463d69a4a98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Windows
+    second: {fileID: 2100000, guid: 38cf99df61a371e4f9d043f3362501dd, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
