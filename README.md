@@ -42,5 +42,10 @@ Similar to prototype 2, http put
 rgb to xy
 
 ## The Interaction with the physical environment
-### Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
+Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
+
+
+
+## Spaceship Control
+The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
 
