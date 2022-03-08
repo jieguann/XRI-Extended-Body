@@ -21,10 +21,6 @@ let totalSecond = 0;
 let minutes = 0;
 let seconds = 0;
 
-//set cell phone time
-let totalCellPhoneSecond = 0;
-let CellPhoneMinutes = 0;
-let CellPhoneSeconds = 0;
 
 
 function preload() {
@@ -68,7 +64,8 @@ function drawDetection(){
     object = detections[i];
 
 
-    if(object.label=="person" || object.label == "cell phone"){
+    if(object.label=="person" || object.label == "cell phone" ||
+      object.label == "teddy bear" || object.label == "wine glass"){
 
 
       stroke(0, 255, 0);
@@ -99,56 +96,46 @@ function drawDetection(){
         //console.log(minutes + ":" + seconds);
       }
       //control cell phone value
-      if(object.label == "cell phone"){
-        totalCellPhoneSecond = 0;
-      }
-      else{
-        if(CellPhoneSeconds<3){
-          totalCellPhoneSecond++;
-        }
-      }
-
       
-      CellPhoneMinutes = Math.floor(totalCellPhoneSecond/3600);
-      CellPhoneSeconds = Math.floor((totalCellPhoneSecond - CellPhoneMinutes *3600)/60);
-      
+    client.publish('jieThesis/Oculus/seconds', seconds.toString(), { qos: 0, retain: false });
 
-
-      // console.log(minutes + " " + seconds +" "  + totalSecond);
-
-    }
-    client.publish('jieThesis/MetaPlant/seconds', seconds.toString(), { qos: 0, retain: false });
-
-    client.publish('jieThesis/MetaPlant/minutes', minutes.toString(), { qos: 0, retain: false });
-
-    client.publish('jieThesis/MetaPlant/totalSecond', totalSecond.toString(), { qos: 0, retain: false });
-
-    //client.publish('jieThesis/MetaPlant/CellPhoneMinutes', CellPhoneMinutes.toString(), { qos: 0, retain: false });
+    client.publish('jieThesis/Oculus/minutes', minutes.toString(), { qos: 0, retain: false });
     
-    client.publish('jieThesis/MetaPlant/CellPhoneSeconds', CellPhoneSeconds.toString(), { qos: 0, retain: false });
-
+    
+    
   }
+}
 
-
-  //empty personArray
-  // calculate how many people are in the frame
-  // console.log(personArray.length);
-  //turn number of people into a string
-  // let numPeople = personArray.length.toString();
-
-
-
-
+    objectDetector('cell phone', 'cellPhone')
+    objectDetector("teddy bear", "teddyBear")
+    objectDetector("wine glass", "wineGlass")
 
 }
+
+  const objectDetector = (objectLabel,mqttName) => {
+
+    let flag = false
+    for (let i = 0; i < detections.length; i++) {
+      // if(detections.length >0){
+        object = detections[i];
+    
+    if(object.label === objectLabel){
+      flag = true;
+    }
+    
+    client.publish('jieThesis/Oculus/' + mqttName, flag.toString(), { qos: 0, retain: false });
+
+  }
+  }
+
 
 
 
 //Code for MQTT
 const clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 
-// const host = 'wss://mqtt.eclipseprojects.io:443/mqtt'
-const host = 'ws://134.122.33.147:9001/mqtt'
+const host = 'wss://mqtt.eclipseprojects.io:443/mqtt'
+//const host = 'ws://134.122.33.147:9001/mqtt'
 
 console.log('Connecting mqtt client')
 const client = mqtt.connect(host)
