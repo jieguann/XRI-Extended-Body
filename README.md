@@ -41,6 +41,22 @@ Similar to prototype 2, http put
 
 rgb to xy
 
+require a flag to trigger the light in http put
+```ruby
+  private void OnTriggerEnter(Collider other)
+    {if(flag == true)
+        {
+            if (other.tag == "bulb")
+            {
+                turnOnLight = StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255, true));
+                StopCoroutine(turnOnLight);
+                flag = false;            
+            }
+        }
+        
+    }
+```
+
 ## The Interaction with the physical environment
 Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
 
