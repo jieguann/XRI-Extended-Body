@@ -55,6 +55,19 @@ public class lightControl : MonoBehaviour
         httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/3/state");
         httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/2/state");
         httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/1/state");
+        /*
+        var client = new HttpClient();
+        client.Post(new Uri("https://maker.ifttt.com/trigger/toggleLight/json/with/key/mSl1498NtCACZrYh8eAbtz9ZgfAdFtowYUZPsDmyPhb"), null,
+            HttpCompletionOption.AllResponseContent, r =>
+            {   // This callback is raised when the request completes
+                if (r.IsSuccessStatusCode)
+                {    // Read the response content as a string if the server returned a success status code
+                    string responseData = r.ReadAsString();
+                    //print(responseData);
+                }
+            }); 
+         */
+
 
     }
 

@@ -12,21 +12,25 @@ public class triggerLight : MonoBehaviour
 
     private Coroutine turnOnLight;
     private Coroutine turnOffLight;
-    
 
+    private bool flag;
     void Start()
     {
-        
+        flag = true;
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "bulb")
+    {if(flag == true)
         {
-            turnOnLight = StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255, true));
-
-            StopCoroutine(turnOnLight);
+            if (other.tag == "bulb")
+            {
+                turnOnLight = StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255, true));
+                StopCoroutine(turnOnLight);
+                flag = false;            
+            }
         }
+        
+
         
 
         
@@ -34,12 +38,17 @@ public class triggerLight : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "bulb")
+        if(flag == false)
         {
-            //bri is between 0 - 255
-            turnOffLight = StartCoroutine(control.HttpPutLight(1f, 1f, 0.5f, 0, false));
+            if (other.tag == "bulb")
+            {
+                //bri is between 0 - 255
+                turnOffLight = StartCoroutine(control.HttpPutLight(1f, 1f, 0.5f, 0, false));
 
-            StopCoroutine(turnOffLight);
+                StopCoroutine(turnOffLight);
+                flag = true;
+            }
         }
+       
     }
 }

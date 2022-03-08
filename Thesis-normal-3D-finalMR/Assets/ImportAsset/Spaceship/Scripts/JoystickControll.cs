@@ -11,6 +11,8 @@ public class JoystickControll : MonoBehaviour
 
     public Transform topOfJoystick;
     public Quaternion originalJoystick;
+    public Transform originalTop;
+
     private float TiltMax;
     
     public float forwardBackwardTilt = 0;
@@ -29,6 +31,7 @@ public class JoystickControll : MonoBehaviour
         //
         TiltMax = 17f;
         originalJoystick = transform.localRotation;
+        originalTop = topOfJoystick;
     }
 
     // Update is called once per frame
@@ -98,9 +101,22 @@ public class JoystickControll : MonoBehaviour
             //rocketBody.drag = 50;
         }
 
-        transform.LookAt(topOfJoystick.position, transform.up);
+        //transform.LookAt(topOfJoystick.position, transform.up);
 
     }
+
+    /*
+    public void OnJoystickUnselect()
+    {
+        
+        transform.localRotation = originalJoystick;
+        topOfJoystick = originalTop;
+        forwardBackwardTiltNormalnized = 0f;
+        sideToSideTiltNormalnized = 0f;
+        //spaceship.velocity = new Vector3(0f, 0f, 0f);
+    }
+
+    */
 
     /*
     public void joystickerCOntrollerOnSelect()
@@ -110,10 +126,10 @@ public class JoystickControll : MonoBehaviour
     */
 
 
-    /*
+    
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("PlayerHand"))
+        if (other.CompareTag("bulb"))
         {
             transform.LookAt(other.transform.position, transform.up);
         }
@@ -121,7 +137,7 @@ public class JoystickControll : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("PlayerHand"))
+        if (other.CompareTag("bulb"))
         {
             //transform.LookAt(other.transform.position, transform.up);
             //topOfJoystick.rotation.eulerAngles.x = 0f;
@@ -132,7 +148,7 @@ public class JoystickControll : MonoBehaviour
             sideToSideTiltNormalnized = 0f;
         }
     }
-    */
+    
     //Remap range
     float map(float s, float a1, float a2, float b1, float b2)
     {
