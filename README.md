@@ -32,7 +32,13 @@ https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 ### Comparare to Other device
 Price
 
+### The Interaction with the physical environment
+Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
 
+
+
+### Spaceship Control
+The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
 
 
 ## Philip Hue Color Control
@@ -41,6 +47,26 @@ Similar to prototype 2, http put
 
 rgb to xy
 
-## The Interaction with the physical environment
-### Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
+require a flag to trigger the light in http put
+```ruby
+  private void OnTriggerEnter(Collider other)
+    {if(flag == true)
+        {
+            if (other.tag == "bulb")
+            {
+                turnOnLight = StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255, true));
+                StopCoroutine(turnOnLight);
+                flag = false;            
+            }
+        }
+        
+    }
+```
 
+
+## CocoSSD object detection
+*  human detection, for the time on MR zone that affect the tree growing.
+*  If a "teddy bear" appear, the MR Environment will showing some heart. <br/> <img src="https://user-images.githubusercontent.com/60665347/157285082-8bb4b555-f848-456b-be7e-59f51243fb37.jpg" alt="drawing" width="100"/> 
+*  If a "wine glass" present, the MR Environemnt will have wine flow. <br/><img src="https://user-images.githubusercontent.com/60665347/157285875-93437da3-8647-43ea-8cdf-64b34475e101.jpg" alt="drawing" width="100"/> 
+
+*  If a mobile phone present, some text will around.
