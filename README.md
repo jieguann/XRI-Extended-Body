@@ -66,7 +66,7 @@ require a flag to trigger the light in http put
 
 ## CocoSSD object detection
 *  human detection, for the time on MR zone that affect the tree growing.
-*  If a "teddy bear" appear, the MR Environment will showing some heart. <br/> ![d18dcbbb7ebf195223e957f609b6cb3](https://user-images.githubusercontent.com/60665347/157285082-8bb4b555-f848-456b-be7e-59f51243fb37.jpg)
-*  If a "wine glass" present, the MR Environemnt will have wine flow. <br/> ![1b4f8083667a3c71509b395e570b4fa](https://user-images.githubusercontent.com/60665347/157285875-93437da3-8647-43ea-8cdf-64b34475e101.jpg)
+*  If a "teddy bear" appear, the MR Environment will showing some heart. <br/> <img src="https://user-images.githubusercontent.com/60665347/157285082-8bb4b555-f848-456b-be7e-59f51243fb37.jpg" alt="drawing" width="100"/> 
+*  If a "wine glass" present, the MR Environemnt will have wine flow. <br/><img src="https://user-images.githubusercontent.com/60665347/157285875-93437da3-8647-43ea-8cdf-64b34475e101.jpg" alt="drawing" width="100"/> 
 
 *  If a mobile phone present, some text will around.
