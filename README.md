@@ -32,7 +32,13 @@ https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 ### Comparare to Other device
 Price
 
+### The Interaction with the physical environment
+Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
 
+
+
+### Spaceship Control
+The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
 
 
 ## Philip Hue Color Control
@@ -57,11 +63,5 @@ require a flag to trigger the light in http put
     }
 ```
 
-## The Interaction with the physical environment
-Hand Tracking will not working due to it require a lighting environment. When the intersity of light is low, the hand Tracking will lose. Hence, using the controller is a good choise at this time.
 
-
-
-## Spaceship Control
-The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
 
