@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     public GameObject spaceshipInterior;
     Material[] materials;
     Color[] spaceshipInteriorColor;
+
+    public Material skyboxMat;
+    public bool skyboxGlalaxyFlag;
+
+
     void Start()
     {
         //mr = spaceship.GetComponentsInChildren<MeshRenderer>().Length;
@@ -48,7 +53,8 @@ public class GameManager : MonoBehaviour
 
         materials = spaceshipInterior.GetComponent<MeshRenderer>().materials;
 
-        
+
+        RenderSettings.skybox = null;
     }
 
     // Update is called once per frame
@@ -72,6 +78,16 @@ public class GameManager : MonoBehaviour
             spaceshipInteriorColor[i].a = transparentValue;
             materials[i].color = spaceshipInteriorColor[i];
 
+        }
+
+
+        if(skyboxGlalaxyFlag == true)
+        {
+            RenderSettings.skybox = skyboxMat;
+        }
+        else
+        {
+            RenderSettings.skybox = null;
         }
 
 
