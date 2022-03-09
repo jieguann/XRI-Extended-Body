@@ -30,6 +30,7 @@ public class LSystemsGenerator : MonoBehaviour
     public float treeSize;
     
     [SerializeField] private GameObject treeParent;
+    [SerializeField] private Transform treeParentAnchor;
     [SerializeField] private GameObject branch;
     [SerializeField] private GameObject leaf;
     //[SerializeField] private GameObject fireParticles;
@@ -38,7 +39,7 @@ public class LSystemsGenerator : MonoBehaviour
     
     //public LightControl control;
     //[SerializeField] private GameObject dynamicObject;
-    [SerializeField] private HUDScript HUD;
+    //[SerializeField] private HUDScript HUD;
 
     private const string axiom = "X";
 
@@ -82,7 +83,7 @@ public class LSystemsGenerator : MonoBehaviour
     }
 
     private void Update()
-    {   
+    {   /*
         if (HUD.hasGenerateBeenPressed || Input.GetKeyDown(KeyCode.G))
         {
             ResetRandomValues();
@@ -151,6 +152,7 @@ public class LSystemsGenerator : MonoBehaviour
 
             titleLastFrame = title;
         }
+        
 
         if (iterationsLastFrame != iterations)
         {
@@ -165,6 +167,7 @@ public class LSystemsGenerator : MonoBehaviour
                 HUD.warning.gameObject.SetActive(false);
             }
         }
+        */
 
         if (iterationsLastFrame != iterations ||
                 angleLastFrame  != angle ||
@@ -318,7 +321,7 @@ public class LSystemsGenerator : MonoBehaviour
     {
         Destroy(Tree);
 
-        Tree = Instantiate(treeParent);
+        Tree = Instantiate(treeParent, treeParentAnchor);
         Tree.transform.localScale = new Vector3(treeSize, treeSize, treeSize);
 
         currentString = axiom;
@@ -361,7 +364,7 @@ public class LSystemsGenerator : MonoBehaviour
 
 
         animateTree();
-        Tree.transform.rotation = Quaternion.Euler(0, HUD.rotation.value, 0);
+        //Tree.transform.rotation = Quaternion.Euler(0, HUD.rotation.value, 0);
     }
 
     private void SelectTreeOne()
@@ -480,7 +483,7 @@ public class LSystemsGenerator : MonoBehaviour
 
     IEnumerator TextFade()
     {
-        Color c = HUD.warning.color;
+        //Color c = HUD.warning.color;
 
         float TOTAL_TIME = 4f;
         float FADE_DURATION = .25f;
@@ -489,18 +492,18 @@ public class LSystemsGenerator : MonoBehaviour
         {
             if (timer > TOTAL_TIME - FADE_DURATION)
             {
-                c.a = (TOTAL_TIME - timer) / FADE_DURATION;
+                //c.a = (TOTAL_TIME - timer) / FADE_DURATION;
             }
             else if (timer > FADE_DURATION)
             {
-                c.a = 1f;
+                //c.a = 1f;
             }
             else
             {
-                c.a = timer / FADE_DURATION;
+                //c.a = timer / FADE_DURATION;
             }
 
-            HUD.warning.color = c;
+            //HUD.warning.color = c;
 
             yield return null;
         }
