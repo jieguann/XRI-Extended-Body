@@ -1075,6 +1075,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19490449, y: 0.025595741, z: 0.72013104}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &224050650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224050651}
+  m_Layer: 0
+  m_Name: Planets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &224050651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224050650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.084423, y: -5.6875324, z: 23.39286}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1499645286}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &226034238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3387,7 +3418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4262,7 +4293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectionSurfaceType: 0
-  overlayType: 1
+  overlayType: 2
   compositionDepth: 0
   hidden: 0
   overridePerLayerColorScaleAndOffset: 0
@@ -11076,7 +11107,7 @@ MonoBehaviour:
   spaceshipMovementSpeed: 10
   spaceshipRotateSpeed: 20
   spaceship: {fileID: 1577158161}
-  transparentValue: 0.2
+  transparentValue: 0.7
   spaceshipInterior: {fileID: 1901855450}
   skyboxMat: {fileID: 2100000, guid: 860a66ca4259b384f9ec01b687f71c3c, type: 2}
   skyboxGlalaxyFlag: 0
@@ -11133,6 +11164,13 @@ MonoBehaviour:
   inLandingZone: 0
   player: {fileID: 398675692}
   gameManager: {fileID: 1497399828}
+  planetPrefeb:
+  - {fileID: 124680, guid: ed9db51865b70e24d8a9214f83df5912, type: 3}
+  - {fileID: 127652, guid: 9bc7818d5f646e449a9a231e56b9bcb2, type: 3}
+  - {fileID: 189752, guid: 5bb6f67ac3a49004fb0e5b9174a1d1bb, type: 3}
+  - {fileID: 126364, guid: 26e950ddae2da3a4581a7692739c06fc, type: 3}
+  - {fileID: 126892, guid: f5964d934705c9f4aa7ef77d1a1bc85c, type: 3}
+  planetObject: {fileID: 0}
 --- !u!135 &1499645282
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11144,7 +11182,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.92
+  m_Radius: 5.39
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &1499645283
 SphereCollider:
@@ -11166,7 +11204,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499645280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11215,13 +11253,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499645280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.1, y: -1.8810312, z: 99.1}
-  m_LocalScale: {x: 22.53757, y: 22.53757, z: 22.53757}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -46.3, y: 10.5, z: 16.2}
+  m_LocalScale: {x: 2.9010928, y: 2.9010928, z: 2.9010928}
   m_Children:
   - {fileID: 1736784482}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 224050651}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1499645287
 Rigidbody:
@@ -11964,6 +12002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577158162}
+  - component: {fileID: 1577158163}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -11987,6 +12026,62 @@ Transform:
   m_Father: {fileID: 398675692}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1577158163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577158161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555725d48e9051a4bb6b8d45178c2fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectionSurfaceType: 0
+  overlayType: 1
+  compositionDepth: 1
+  hidden: 0
+  overridePerLayerColorScaleAndOffset: 0
+  colorScale: {x: 1, y: 1, z: 1, w: 1}
+  colorOffset: {x: 0, y: 0, z: 0, w: 0}
+  colorMapEditorType_: 0
+  colorMapEditorGradient:
+    serializedVersion: 2
+    key0: {r: 0, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorMapEditorContrast: 0
+  colorMapEditorBrightness: 0
+  colorMapEditorPosterize: 0
+  textureOpacity_: 1
+  edgeRenderingEnabled_: 0
+  edgeColor_: {r: 1, g: 1, b: 1, a: 1}
+  colorMapType: 0
 --- !u!114 &1586441120 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8553364197529364881, guid: 885ecae56b16f13428a67de5ae482a72, type: 3}
@@ -13060,7 +13155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736784481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.502, z: 0}
+  m_LocalPosition: {x: 0, y: 4.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1499645286}
@@ -20682,7 +20777,7 @@ Transform:
   - {fileID: 1634875853}
   - {fileID: 1503886738}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1633367904852906860
 Transform:

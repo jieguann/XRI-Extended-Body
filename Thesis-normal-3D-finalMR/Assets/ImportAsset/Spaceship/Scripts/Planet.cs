@@ -12,9 +12,17 @@ public class Planet : MonoBehaviour
     public GameManager gameManager;
     private Coroutine landingCoroutine;
     // Start is called before the first frame update
+    public GameObject[] planetPrefeb;
+    public GameObject planetObject;
+
+
+    int indexPlanet;
     void Start()
     {
-        
+        Random.seed = (int)System.DateTime.Now.Ticks;
+        indexPlanet = Random.Range(0, planetPrefeb.Length);
+        planetObject = Instantiate(planetPrefeb[indexPlanet], transform);
+        print(planetPrefeb.Length - 1);
     }
 
     // Update is called once per frame
