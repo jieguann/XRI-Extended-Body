@@ -107,6 +107,6 @@ public class GameManager : MonoBehaviour
             planets.SetActive(false);
         }
 
-        MRSpace.transform.position = keyboardPosition.position;
+        //MRSpace.transform.position = keyboardPosition.position;
     }
 }
