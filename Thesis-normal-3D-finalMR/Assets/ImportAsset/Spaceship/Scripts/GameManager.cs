@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject planets;
     public bool planetsFlag;
+
+    public Transform keyboardPosition;
+    //public Transform MRSpace;
     void Start()
     {
         //mr = spaceship.GetComponentsInChildren<MeshRenderer>().Length;
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
 
 
         RenderSettings.skybox = null;
-        
+        planets.SetActive(false);
     }
 
     // Update is called once per frame
@@ -95,5 +98,15 @@ public class GameManager : MonoBehaviour
         }
 
 
+        if (planetsFlag == true)
+        {
+            planets.SetActive(true);
+        }
+        else
+        {
+            planets.SetActive(false);
+        }
+
+        MRSpace.transform.position = keyboardPosition.position;
     }
 }

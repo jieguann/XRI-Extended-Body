@@ -25,13 +25,13 @@ public class OVRTrackedKeyboardHands : MonoBehaviour
 	public OVRTrackedKeyboard KeyboardTracker;
 
 	private OVRCameraRig cameraRig_;
-	private OVRHand leftHand_;
+	public OVRHand leftHand_;
 	private OVRSkeleton leftHandSkeleton_;
 	private OVRSkeletonRenderer leftHandSkeletonRenderer_;
 	private GameObject leftHandSkeletonRendererGO_;
 	private SkinnedMeshRenderer leftHandSkinnedMeshRenderer_;
 	private OVRMeshRenderer leftHandMeshRenderer_;
-	private OVRHand rightHand_;
+	public OVRHand rightHand_;
 	private OVRSkeleton rightHandSkeleton_;
 	private OVRSkeletonRenderer rightHandSkeletonRenderer_;
 	private GameObject rightHandSkeletonRendererGO_;
@@ -199,9 +199,9 @@ public class OVRTrackedKeyboardHands : MonoBehaviour
 	{
 		enabled = false;
 
-		cameraRig_ = FindObjectOfType<OVRCameraRig>();
-		leftHand_ = cameraRig_.leftHandAnchor.GetComponentInChildren<OVRHand>();
-		rightHand_ = cameraRig_.rightHandAnchor.GetComponentInChildren<OVRHand>();
+		//cameraRig_ = FindObjectOfType<OVRCameraRig>();
+		//leftHand_ = cameraRig_.leftHandAnchor.GetComponentInChildren<OVRHand>();
+		//rightHand_ = cameraRig_.rightHandAnchor.GetComponentInChildren<OVRHand>();
 		leftHandSkeleton_ = leftHand_.GetComponent<OVRSkeleton>();
 		rightHandSkeleton_ = rightHand_.GetComponent<OVRSkeleton>();
 

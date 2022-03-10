@@ -321,7 +321,7 @@ public class LSystemsGenerator : MonoBehaviour
     {
         Destroy(Tree);
 
-        Tree = Instantiate(treeParent, treeParentAnchor);
+        Tree = Instantiate(treeParent, treeParent.GetComponentInParent<Transform>());
         Tree.transform.localScale = new Vector3(treeSize, treeSize, treeSize);
 
         currentString = axiom;
@@ -360,7 +360,7 @@ public class LSystemsGenerator : MonoBehaviour
         //cloneString = currentString;
 
 
-        Debug.Log(currentString);
+      //Debug.Log(currentString);
 
 
         animateTree();

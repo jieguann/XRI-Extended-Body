@@ -8,6 +8,9 @@ public class Planet : MonoBehaviour
     public bool hasLanded;
     //public string landingButton;
     public bool inLandingZone;
+    public bool onLanding;
+
+
     public Transform player;
     public GameManager gameManager;
     private Coroutine landingCoroutine;
@@ -17,19 +20,29 @@ public class Planet : MonoBehaviour
 
 
     int indexPlanet;
+
+    public lightControl control;
+    private bool flag;
+    private Coroutine turnOnLight;
+    Color col;
+
     void Start()
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
         indexPlanet = Random.Range(0, planetPrefeb.Length);
         planetObject = Instantiate(planetPrefeb[indexPlanet], transform);
+        col = planetObject.GetComponent<Renderer>().material.color;
         print(planetPrefeb.Length - 1);
+
+        flag = true;
+        onLanding = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         //if (Input.GetButtonDown(landingButton) && inLandingZone == true)
-        if (inLandingZone == true && hasLanded == false)
+        if (inLandingZone == true && onLanding == true)
         {
             if(hasLanded == false)
             {
@@ -37,6 +50,7 @@ public class Planet : MonoBehaviour
                 //get ship to land
                 landingCoroutine = StartCoroutine(land());
                 hasLanded = true;
+                onLanding = false;
 
             }
             else
@@ -53,6 +67,16 @@ public class Planet : MonoBehaviour
         if(other.tag == "Player")
         {
             inLandingZone = true;
+
+
+            if (flag == true)
+            {
+                
+                    turnOnLight = StartCoroutine(control.HttpPutLight(col.r, col.g, col.b, 255, true));
+                    StopCoroutine(turnOnLight);
+                    flag = false;
+                
+            }
         }
     }
 
@@ -61,6 +85,9 @@ public class Planet : MonoBehaviour
         if (other.tag == "Player")
         {
             inLandingZone = false;
+            flag = true;
+            onLanding = true;
+
         }
     }
 
@@ -68,7 +95,7 @@ public class Planet : MonoBehaviour
     {
         while (Vector3.Distance(player.position, landingSpot.position) > 0.5f)
         {
-            player.position = Vector3.MoveTowards(player.position, landingSpot.position, gameManager.spaceshipMovementSpeed * Time.deltaTime);
+            landingSpot.position = Vector3.MoveTowards(landingSpot.position, player.position, gameManager.spaceshipMovementSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }

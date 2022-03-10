@@ -4,7 +4,7 @@ using UnityEngine;
 public class JoystickControll : MonoBehaviour
 {   //public GameObject spaceship;
     public GameManager gameManager;
-    public Transform spaceship;
+    public Transform planetsSpace;
     public bool canMove;
     public bool canRotate;
 
@@ -27,7 +27,7 @@ public class JoystickControll : MonoBehaviour
 
     private void Start()
     {   //get spaceship rigibody
-        spaceship = gameManager.spaceship.transform;
+        //spaceship = gameManager.spaceship.transform;
         //
         TiltMax = 17f;
         originalJoystick = transform.localRotation;
@@ -43,7 +43,7 @@ public class JoystickControll : MonoBehaviour
         if (forwardBackwardTilt < 355 && forwardBackwardTilt > 290)
         {
             forwardBackwardTilt = Math.Abs(forwardBackwardTilt - 360);
-            forwardBackwardTiltNormalnized = -map(forwardBackwardTilt, 0f, TiltMax, 0f, 1f);
+            forwardBackwardTiltNormalnized = map(forwardBackwardTilt, 0f, TiltMax, 0f, 1f);
             //print(forwardBackwardTiltNormalnized);
 
             //Debug.Log("Backward" + forwardBackwardTilt);
@@ -52,7 +52,7 @@ public class JoystickControll : MonoBehaviour
         }
         else if (forwardBackwardTilt > 5 && forwardBackwardTilt < 74)
         {
-            forwardBackwardTiltNormalnized = map(forwardBackwardTilt, 0f, TiltMax, 0f, 1f);
+            forwardBackwardTiltNormalnized = -map(forwardBackwardTilt, 0f, TiltMax, 0f, 1f);
 
             //print(forwardBackwardTiltNormalnized);
             //Debug.Log("Forward" + forwardBackwardTilt);
@@ -64,7 +64,7 @@ public class JoystickControll : MonoBehaviour
         if (canMove == true)
         {
             //spaceship.AddForce(spaceship.transform.forward * Time.deltaTime * gameManager.spaceshipMovementSpeed * forwardBackwardTiltNormalnized);
-            spaceship.position += spaceship.forward * Time.deltaTime * gameManager.spaceshipMovementSpeed * forwardBackwardTiltNormalnized;
+            planetsSpace.position -= planetsSpace.forward * Time.deltaTime * gameManager.spaceshipMovementSpeed * forwardBackwardTiltNormalnized;
         }
            
         
@@ -81,6 +81,7 @@ public class JoystickControll : MonoBehaviour
         }
         else if (sideToSideTilt > 5 && sideToSideTilt < 74)
         {
+            
             sideToSideTiltNormalnized = -map(sideToSideTilt, 0f, TiltMax, 0f, 1f);
             //Debug.Log("Left" + sideToSideTilt);
             //Turn something using sideToSideTilt as speed
@@ -88,7 +89,7 @@ public class JoystickControll : MonoBehaviour
 
         if(canRotate == true)
         {
-            spaceship.Rotate(0, sideToSideTiltNormalnized * Time.deltaTime * gameManager.spaceshipRotateSpeed, 0);
+            planetsSpace.Rotate(0, -sideToSideTiltNormalnized * Time.deltaTime * gameManager.spaceshipRotateSpeed, 0);
         }
 
 
