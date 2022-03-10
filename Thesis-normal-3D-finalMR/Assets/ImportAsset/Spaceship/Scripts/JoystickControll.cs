@@ -87,10 +87,15 @@ public class JoystickControll : MonoBehaviour
             //Turn something using sideToSideTilt as speed
         }
 
-        if(canRotate == true)
+        if (canRotate == true)
         {
-            planetsSpace.Rotate(0, -sideToSideTiltNormalnized * Time.deltaTime * gameManager.spaceshipRotateSpeed, 0);
+            Vector3 dir = Vector3.left;
+            //planetsSpace.Rotate(0, -sideToSideTiltNormalnized * Time.deltaTime * gameManager.spaceshipRotateSpeed, 0);
+            planetsSpace.Translate(dir * sideToSideTiltNormalnized * gameManager.spaceshipRotateSpeed * Time.deltaTime);
         }
+            
+                
+            
 
 
 

@@ -20,7 +20,8 @@ public class triggerLight : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {if(flag == true)
+    {
+        if(flag == true)
         {
             if (other.tag == "bulb")
             {

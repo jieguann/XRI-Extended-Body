@@ -27,12 +27,17 @@ public class Planet : MonoBehaviour
     Color col;
 
     void Start()
+
     {
+        landingSpot = GetComponentInParent<Transform>();
+        control = GameObject.FindWithTag("lightTrigger").GetComponent<lightControl>();
+        player = GameObject.FindWithTag("Player").transform;
+        gameManager = GameObject.FindWithTag("gameManager").GetComponent<GameManager>();
         Random.seed = (int)System.DateTime.Now.Ticks;
         indexPlanet = Random.Range(0, planetPrefeb.Length);
         planetObject = Instantiate(planetPrefeb[indexPlanet], transform);
         col = planetObject.GetComponent<Renderer>().material.color;
-        print(planetPrefeb.Length - 1);
+        //print(planetPrefeb.Length - 1);
 
         flag = true;
         onLanding = true;

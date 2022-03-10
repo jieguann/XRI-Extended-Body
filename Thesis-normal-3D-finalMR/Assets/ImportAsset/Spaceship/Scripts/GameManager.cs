@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public Transform keyboardPosition;
     //public Transform MRSpace;
+    public Transform playerTrigger;
     void Start()
     {
         //mr = spaceship.GetComponentsInChildren<MeshRenderer>().Length;

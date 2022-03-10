@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PlayerHand
   - bulb
+  - Food
+  - gameManager
+  - lightTrigger
   layers:
   - Default
   - TransparentFX
