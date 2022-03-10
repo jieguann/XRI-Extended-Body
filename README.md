@@ -25,6 +25,10 @@ https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 * Hand Pose (Gesture)
   * Stop - Open five fingers
   * Scissors - Shake hand
+
+###  Anchor the virtual objects in the physical environemt
+*  Keyborad anchord the virtual object.
+*  Move the virtual planets to simulate the movement of the spaceship since it is hard to move the virtual object and the camera at the same time.
 ### Limitation 
 *  The Mixed Reality experience is Black and White because of the limitation of the Cemera on the device.
 *  Tracking, only keyboard could be used to anchor virtual object persistently. The controller will disable when put down and it can not use together with hand tracking.
@@ -38,7 +42,10 @@ Hand Tracking will not working due to it require a lighting environment. When th
 
 
 ### Spaceship Control
-The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
+*  The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
+*  The planets are in front of the space, and once the spaceship near one of the planet, it will land on it automatically and the physical phylip hue will turn to that color.
+
+
 
 
 ## Philip Hue Color Control
@@ -62,7 +69,6 @@ require a flag to trigger the light in http put
         
     }
 ```
-
 
 ## CocoSSD object detection
 *  human detection, for the time on MR zone that affect the tree growing.
