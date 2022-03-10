@@ -76,3 +76,4 @@ require a flag to trigger the light in http put
 *  If a "wine glass" present, the MR Environemnt will have wine flow. <br/><img src="https://user-images.githubusercontent.com/60665347/157285875-93437da3-8647-43ea-8cdf-64b34475e101.jpg" alt="drawing" width="100"/> 
 
 *  If a mobile phone present, some text will around.
+*  Particle effect is present with https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325?locale=zh-CN in Unity
