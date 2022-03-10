@@ -23,13 +23,15 @@ public class GameManager : MonoBehaviour
     public Material skyboxMat;
     public bool skyboxGlalaxyFlag;
 
-
+    public GameObject planets;
+    public bool planetsFlag;
     void Start()
     {
         //mr = spaceship.GetComponentsInChildren<MeshRenderer>().Length;
         renderers = new MeshRenderer[spaceship.GetComponentsInChildren<MeshRenderer>().Length];
         col = new Color[spaceship.GetComponentsInChildren<MeshRenderer>().Length];
         renderers = spaceship.GetComponentsInChildren<MeshRenderer>();
+
         for (int i = 0; i < renderers.Length; i++)
         {   
 
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
 
 
         RenderSettings.skybox = null;
+        
     }
 
     // Update is called once per frame
