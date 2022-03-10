@@ -14524,15 +14524,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810158351940176, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.000000014901161
       objectReference: {fileID: 0}
     - target: {fileID: 4810158351940176, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.000000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 4810158351940176, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.74
       objectReference: {fileID: 0}
     - target: {fileID: 4810158351940176, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14605,7 +14605,7 @@ PrefabInstance:
     - target: {fileID: 114311352196235728, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: treeParentAnchor
       value: 
-      objectReference: {fileID: 398675692}
+      objectReference: {fileID: 1744122918}
     - target: {fileID: 114311352196235728, guid: 53be443600a798f45ad13664b1e8df94, type: 3}
       propertyPath: rainEffectParticles
       value: 

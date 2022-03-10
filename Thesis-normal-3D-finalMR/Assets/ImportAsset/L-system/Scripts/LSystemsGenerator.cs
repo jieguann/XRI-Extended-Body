@@ -321,7 +321,7 @@ public class LSystemsGenerator : MonoBehaviour
     {
         Destroy(Tree);
 
-        Tree = Instantiate(treeParent, treeParent.GetComponentInParent<Transform>());
+        Tree = Instantiate(treeParent, treeParentAnchor);
         Tree.transform.localScale = new Vector3(treeSize, treeSize, treeSize);
 
         currentString = axiom;
