@@ -25,6 +25,10 @@ https://skarredghost.com/2021/10/01/how-to-passthrough-ar-oculus-quest-unity/
 * Hand Pose (Gesture)
   * Stop - Open five fingers
   * Scissors - Shake hand
+
+###  Anchor the virtual objects in the physical environemt
+*  Keyborad anchord the virtual object.
+*  Move the virtual planets to simulate the movement of the spaceship since it is hard to move the virtual object and the camera at the same time.
 ### Limitation 
 *  The Mixed Reality experience is Black and White because of the limitation of the Cemera on the device.
 *  Tracking, only keyboard could be used to anchor virtual object persistently. The controller will disable when put down and it can not use together with hand tracking.
