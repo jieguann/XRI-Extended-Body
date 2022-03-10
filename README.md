@@ -38,7 +38,10 @@ Hand Tracking will not working due to it require a lighting environment. When th
 
 
 ### Spaceship Control
-The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
+*  The bulb will need to attach to the top of the joystick to control the spaceship. The bulb represent a clue between virtual and physical.
+*  The planets are in front of the space, and once the spaceship near one of the planet, it will land on it automatically and the physical phylip hue will turn to that color.
+
+
 
 
 ## Philip Hue Color Control
@@ -62,7 +65,6 @@ require a flag to trigger the light in http put
         
     }
 ```
-
 
 ## CocoSSD object detection
 *  human detection, for the time on MR zone that affect the tree growing.
