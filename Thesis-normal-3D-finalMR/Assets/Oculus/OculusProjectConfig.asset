@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetDeviceTypes: 0100000002000000
   allowOptional3DofHeadTracking: 0
-  handTrackingSupport: 0
+  handTrackingSupport: 1
   handTrackingFrequency: 0
   spatialAnchorsSupport: 0
-  renderModelSupport: 0
-  trackedKeyboardSupport: 0
+  renderModelSupport: 1
+  trackedKeyboardSupport: 2
   disableBackups: 1
   enableNSCConfig: 1
   securityXmlPath: 
   skipUnneededShaders: 0
   focusAware: 1
-  requiresSystemKeyboard: 0
+  requiresSystemKeyboard: 1
   experimentalFeaturesEnabled: 0
   insightPassthroughEnabled: 1
-  systemSplashScreen: {fileID: 2800000, guid: 5c06354455999f94ea26114e261dde6d, type: 3}
+  systemSplashScreen: {fileID: 0}
