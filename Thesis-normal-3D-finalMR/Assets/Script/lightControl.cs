@@ -7,6 +7,8 @@ using CI.HttpClient;
 using ProBuilder2.Common;
 public class lightControl : MonoBehaviour
 {
+    public string ipAddress;
+    public string hueAddress;
     [Serializable]
     public class LightJson
     {
@@ -51,10 +53,14 @@ public class lightControl : MonoBehaviour
 
     private void updateLight()
     {
-        httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/4/state");
-        httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/3/state");
-        httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/2/state");
-        httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/1/state");
+        //httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/4/state");
+        httpPostLight("http://" + ipAddress + "/api/" +hueAddress+ "/lights/4/state");
+        httpPostLight("http://" + ipAddress + "/api/" + hueAddress + "/lights/3/state");
+        httpPostLight("http://" + ipAddress + "/api/" + hueAddress + "/lights/2/state");
+        httpPostLight("http://" + ipAddress + "/api/" + hueAddress + "/lights/1/state");
+        //httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/3/state");
+        //httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/2/state");
+        //httpPostLight("http://192.168.2.49/api/zx9NNIegikmyEgZZOQmR-FTTzTomumRr4nzjyoWc/lights/1/state");
         /*
         var client = new HttpClient();
         client.Post(new Uri("https://maker.ifttt.com/trigger/toggleLight/json/with/key/mSl1498NtCACZrYh8eAbtz9ZgfAdFtowYUZPsDmyPhb"), null,
