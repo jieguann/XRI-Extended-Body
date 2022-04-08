@@ -1,4 +1,8 @@
 # Thesis-FinalPrototype-OculusQuest2-MR
+## detection link
+https://jieguann.github.io/Thesis-FinalPrototype-OculusQuest2-MR/WebcamDetection/index.html
+
+
 
 ## Oculus Quest 2 Develop in Unity Study
 ### Unity setup
