@@ -16,8 +16,36 @@ public class triggerLight : MonoBehaviour
     private bool flag;
     void Start()
     {
-        flag = true;
+        flag = false;
     }
+
+
+    public void triggerLighting()
+    {
+        flag = !flag;
+        if (flag == true)
+        {
+            
+                turnOnLight = StartCoroutine(control.HttpPutLight(1f, 1f, 1f, 255, true));
+                StopCoroutine(turnOnLight);
+                Debug.Log("true");
+                
+            
+        }
+
+        if (flag == false)
+        {
+            
+                //bri is between 0 - 255
+                turnOffLight = StartCoroutine(control.HttpPutLight(1f, 1f, 0.5f, 0, false));
+
+                StopCoroutine(turnOffLight);
+
+            Debug.Log("false");
+        }
+    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
