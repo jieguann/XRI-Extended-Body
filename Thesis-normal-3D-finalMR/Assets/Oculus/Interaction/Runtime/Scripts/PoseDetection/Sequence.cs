@@ -38,7 +38,7 @@ namespace Oculus.Interaction.PoseDetection
     /// is true. If _remainActiveCooldown > 0, Sequence.Active will remain active even after RemainActiveWhile becomes
     /// false until the cooldown timer is met. The timer is reset if RemainActiveWhile becomes true again.
     /// </summary>
-    public class Sequence : MonoBehaviour
+    public class Sequence : MonoBehaviour, IActiveState
     {
         [Serializable]
         public class ActivationStep
@@ -216,14 +216,13 @@ namespace Oculus.Interaction.PoseDetection
 
         private void EnterNextStep(float time)
         {
-            var currentStep = _stepsToActivate[CurrentActivationStep];
-
             CurrentActivationStep++;
             _currentStepWasActive = false;
-            _stepFailedTime = time + currentStep.MaxStepTime;
 
-            if (CurrentActivationStep != _stepsToActivate.Length)
+            if (CurrentActivationStep < _stepsToActivate.Length)
             {
+                var currentStep = _stepsToActivate[CurrentActivationStep];
+                _stepFailedTime = time + currentStep.MaxStepTime;
                 return;
             }
 

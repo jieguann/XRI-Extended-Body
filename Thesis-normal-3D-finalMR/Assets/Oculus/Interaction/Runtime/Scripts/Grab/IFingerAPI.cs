@@ -13,13 +13,18 @@ permissions and limitations under the License.
 using Oculus.Interaction.Input;
 using UnityEngine;
 
-namespace Oculus.Interaction.GrabAPI
+namespace Oculus.Interaction
 {
+    /// <summary>
+    /// This interface is used for tracking the grabbing strength of the fingers.
+    /// Since said strength can be measured with different methods: pinching, curl,
+    /// trigger presses, etc. Multiple implementations are needed.
+    /// </summary>
     public interface IFingerAPI
     {
         bool GetFingerIsGrabbing(HandFinger finger);
         bool GetFingerIsGrabbingChanged(HandFinger finger, bool targetPinchState);
-        float GetFingerGrabStrength(HandFinger finger);
+        float GetFingerGrabScore(HandFinger finger);
         Vector3 GetCenterOffset();
         void Update(IHand hand);
     }

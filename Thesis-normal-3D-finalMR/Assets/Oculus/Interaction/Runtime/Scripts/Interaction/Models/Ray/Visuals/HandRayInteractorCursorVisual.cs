@@ -93,7 +93,7 @@ namespace Oculus.Interaction
         {
             if (_started)
             {
-                _rayInteractor.WhenInteractorUpdated += UpdateVisual;
+                _rayInteractor.WhenPostprocessed += UpdateVisual;
                 _rayInteractor.WhenStateChanged += UpdateVisualState;
                 UpdateVisual();
             }
@@ -103,7 +103,7 @@ namespace Oculus.Interaction
         {
             if (_started)
             {
-                _rayInteractor.WhenInteractorUpdated -= UpdateVisual;
+                _rayInteractor.WhenPostprocessed -= UpdateVisual;
                 _rayInteractor.WhenStateChanged -= UpdateVisualState;
             }
         }
@@ -127,9 +127,9 @@ namespace Oculus.Interaction
                 _cursor.SetActive(true);
             }
 
-            Vector3 collisionNormal = _rayInteractor.CollisionInfo.Value.normal;
+            Vector3 collisionNormal = _rayInteractor.CollisionInfo.Value.Normal;
             this.transform.position = _rayInteractor.End + collisionNormal * _offsetAlongNormal;
-            this.transform.rotation = Quaternion.LookRotation(_rayInteractor.CollisionInfo.Value.normal, Vector3.up);
+            this.transform.rotation = Quaternion.LookRotation(_rayInteractor.CollisionInfo.Value.Normal, Vector3.up);
 
             if (_rayInteractor.State == InteractorState.Select)
             {

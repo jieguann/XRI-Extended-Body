@@ -15,6 +15,11 @@ using UnityEngine;
 
 namespace Oculus.Interaction.GrabAPI
 {
+    /// <summary>
+    /// This FingerAPI uses the the Pinch value as it comes from the Hand data to detect
+    /// if they are grabbing. It is specially useful with Controllers As Hands since this
+    /// value is directly driven by the trigger presses.
+    /// </summary>
     public class FingerRawPinchAPI : IFingerAPI
     {
         private class FingerPinchData
@@ -24,8 +29,7 @@ namespace Oculus.Interaction.GrabAPI
 
             public float PinchStrength;
             public bool IsPinching;
-            public bool IsPinchingChanged;
-
+            public bool IsPinchingChanged { get; private set; }
             public Vector3 TipPosition { get; private set; }
 
             public FingerPinchData(HandFinger fingerId)
@@ -46,8 +50,16 @@ namespace Oculus.Interaction.GrabAPI
             {
                 PinchStrength = hand.GetFingerPinchStrength(_finger);
                 bool isPinching = hand.GetFingerIsPinching(_finger);
-                IsPinchingChanged = isPinching != IsPinching;
+                if(isPinching != IsPinching)
+                {
+                    IsPinchingChanged = true;
+                }
                 IsPinching = isPinching;
+            }
+
+            public void ClearState()
+            {
+                IsPinchingChanged = false;
             }
         }
 
@@ -91,18 +103,26 @@ namespace Oculus.Interaction.GrabAPI
                    _fingersPinchData[(int)finger].IsPinching == targetPinchState;
         }
 
-        public float GetFingerGrabStrength(HandFinger finger)
+        public float GetFingerGrabScore(HandFinger finger)
         {
             return _fingersPinchData[(int)finger].PinchStrength;
         }
 
         public void Update(IHand hand)
         {
+            ClearState();
             for (int i = 0; i < Constants.NUM_FINGERS; ++i)
             {
                 _fingersPinchData[i].UpdateIsPinching(hand);
             }
+        }
 
+        private void ClearState()
+        {
+            for (int i = 0; i < Constants.NUM_FINGERS; ++i)
+            {
+                _fingersPinchData[i].ClearState();
+            }
         }
     }
 }

@@ -28,6 +28,14 @@ namespace Oculus.Interaction.GrabAPI
         AnyReleased
     }
 
+    /// <summary>
+    /// This struct indicates which fingers should be taken in count
+    /// for performing an interaction (typically a hand-grab).
+    /// All required fingers must be in use in order to start the interaction
+    /// while any of the optional fingers is needed.
+    /// For finishing the action it support either releasing all fingers or
+    /// any of them.
+    /// </summary>
     [System.Serializable]
     public struct GrabbingRule
     {
@@ -136,8 +144,8 @@ namespace Oculus.Interaction.GrabAPI
             _thumbRequirement = FingerRequirement.Required,
             _indexRequirement = FingerRequirement.Optional,
             _middleRequirement = FingerRequirement.Optional,
-            _ringRequirement = FingerRequirement.Optional,
-            _pinkyRequirement = FingerRequirement.Optional,
+            _ringRequirement = FingerRequirement.Ignored,
+            _pinkyRequirement = FingerRequirement.Ignored,
 
             _unselectMode = FingerUnselectMode.AllReleased
         };

@@ -25,13 +25,13 @@ public class OVRTrackedKeyboardHands : MonoBehaviour
 	public OVRTrackedKeyboard KeyboardTracker;
 
 	private OVRCameraRig cameraRig_;
-public OVRHand leftHand_;
+	private OVRHand leftHand_;
 	private OVRSkeleton leftHandSkeleton_;
 	private OVRSkeletonRenderer leftHandSkeletonRenderer_;
 	private GameObject leftHandSkeletonRendererGO_;
 	private SkinnedMeshRenderer leftHandSkinnedMeshRenderer_;
 	private OVRMeshRenderer leftHandMeshRenderer_;
-	public OVRHand rightHand_;
+	private OVRHand rightHand_;
 	private OVRSkeleton rightHandSkeleton_;
 	private OVRSkeletonRenderer rightHandSkeletonRenderer_;
 	private GameObject rightHandSkeletonRendererGO_;
@@ -197,11 +197,9 @@ public OVRHand leftHand_;
 
 	private void Start()
 	{
-		enabled = false;
-
 		cameraRig_ = FindObjectOfType<OVRCameraRig>();
-		//leftHand_ = cameraRig_.leftHandAnchor.GetComponentInChildren<OVRHand>();
-		//rightHand_ = cameraRig_.rightHandAnchor.GetComponentInChildren<OVRHand>();
+		leftHand_ = cameraRig_.leftHandAnchor.GetComponentInChildren<OVRHand>();
+		rightHand_ = cameraRig_.rightHandAnchor.GetComponentInChildren<OVRHand>();
 		leftHandSkeleton_ = leftHand_.GetComponent<OVRSkeleton>();
 		rightHandSkeleton_ = rightHand_.GetComponent<OVRSkeleton>();
 
@@ -228,8 +226,9 @@ public OVRHand leftHand_;
 		leftHand.SetActive(false);
 		rightHand.SetActive(false);
 
-#if !UNITY_EDITOR  // GameObject trees for hands only available on-device
+#if !UNITY_EDITOR  // Initialized in LateUpdate() in editor
 		RetargetHandTrackingToHandPresence();
+		enabled = false;
 #endif
 	}
 
@@ -238,6 +237,20 @@ public OVRHand leftHand_;
 
 	private void LateUpdate()
 	{
+#if UNITY_EDITOR
+		if (!handPresenceInitialized_)
+		{
+			if (leftHandSkeleton_.IsInitialized && rightHandSkeleton_.IsInitialized)
+			{
+				RetargetHandTrackingToHandPresence();
+			}
+			else
+			{
+				return;
+			}
+		}
+#endif
+
 		if (AreControllersActive)
 		{
 			DisableHandObjects();
@@ -492,7 +505,7 @@ public OVRHand leftHand_;
 					$"[tracked_keyboard] - unhandled state: TrackedKeyboardVisibilityChanged {e.State}"
 				);
 		}
-}
+	}
 
 	public struct TrackedKeyboardHandsVisibilityChangedEvent
 	{

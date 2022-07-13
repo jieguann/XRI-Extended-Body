@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using System;
 
-namespace Oculus.Interaction.HandPosing.SnapSurfaces
+namespace Oculus.Interaction.HandGrab.SnapSurfaces
 {
     [Serializable]
     public class SphereSurfaceData : ICloneable
@@ -158,9 +158,9 @@ namespace Oculus.Interaction.HandPosing.SnapSurfaces
         private void Reset()
         {
             _gripPoint = this.transform;
-            if (this.TryGetComponent(out HandGrabPoint grabPoint))
+            if (this.TryGetComponent(out HandGrabPose grabPose))
             {
-                _relativeTo = grabPoint.RelativeTo;
+                _relativeTo = grabPose.RelativeTo;
             }
         }
         #endregion
@@ -226,8 +226,8 @@ namespace Oculus.Interaction.HandPosing.SnapSurfaces
 
         protected Pose MinimalRotationPoseAtSurface(in Pose userPose, in Pose snapPose)
         {
-            Quaternion rotCorrection = Quaternion.FromToRotation(snapPose.up, Direction);
-            Vector3 correctedDir = (rotCorrection * userPose.up).normalized;
+            Quaternion rotCorrection = userPose.rotation * Quaternion.Inverse(snapPose.rotation);
+            Vector3 correctedDir = rotCorrection * Direction;
             Vector3 surfacePoint = NearestPointInSurface(Centre + correctedDir * Radius);
             Quaternion surfaceRotation = RotationAtPoint(surfacePoint, snapPose.rotation, userPose.rotation);
             return new Pose(surfacePoint, surfaceRotation);

@@ -14,14 +14,20 @@ using UnityEngine;
 
 namespace Oculus.Interaction.GrabAPI
 {
+    /// <summary>
+    /// Use this component with a HandGrabAPI so it uses the Raw pinch detector
+    /// instead of the standard Pinch and Palm finger APIS. Specially useful for
+    /// ControllersAsHands since it uses the same value as the trigger presses.
+    /// </summary>
     public class FingerRawPinchInjector : MonoBehaviour
     {
         [SerializeField]
         private HandGrabAPI _handGrabAPI;
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             _handGrabAPI.InjectOptionalFingerPinchAPI(new FingerRawPinchAPI());
+            _handGrabAPI.InjectOptionalFingerGrabAPI(new FingerRawPinchAPI());
         }
     }
 }

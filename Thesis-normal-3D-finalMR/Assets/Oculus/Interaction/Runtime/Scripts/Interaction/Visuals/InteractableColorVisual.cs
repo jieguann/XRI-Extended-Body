@@ -13,7 +13,6 @@ permissions and limitations under the License.
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 
 namespace Oculus.Interaction
 {
@@ -83,6 +82,7 @@ namespace Oculus.Interaction
         {
             if (_started)
             {
+                UpdateVisual();
                 InteractableView.WhenStateChanged += UpdateVisualState;
             }
         }

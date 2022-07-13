@@ -10,7 +10,7 @@ ANY KIND, either express or implied. See the License for the specific language g
 permissions and limitations under the License.
 ************************************************************************************/
 
-using Oculus.Interaction.HandPosing;
+using Oculus.Interaction.HandGrab;
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -33,16 +33,16 @@ namespace Oculus.Interaction.Samples
 
         protected virtual void Update()
         {
-            GameObject volume = null;
+            GameObject shouldHideHandComponent = null;
 
             if (_handGrabInteractor.State == InteractorState.Select)
             {
-                volume = _handGrabInteractor.SelectedInteractable?.gameObject;
+                shouldHideHandComponent = _handGrabInteractor.SelectedInteractable?.gameObject;
             }
 
-            if (volume)
+            if (shouldHideHandComponent)
             {
-                if (volume.TryGetComponent(out ShouldHideHandOnGrab component))
+                if (shouldHideHandComponent.TryGetComponent(out ShouldHideHandOnGrab component))
                 {
                     _handVisual.ForceOffVisibility = true;
                 }
