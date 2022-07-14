@@ -30,7 +30,7 @@ public class ParticleTrigger : MonoBehaviour
             enter[i] = p;
             Debug.Log("color");
         }
-        Debug.Log("trigger");
+        //Debug.Log("trigger");
 
 
         // re-assign the modified particles back into the particle system
