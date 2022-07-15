@@ -26,9 +26,10 @@ public class ParticleTrigger : MonoBehaviour
         for (int i = 0; i < numEnter; i++)
         {
             ParticleSystem.Particle p = enter[i];
-            p.startColor = new Color32(255, 0, 0, 255);
-            enter[i] = p;
-            Debug.Log("color");
+            //p.startColor = new Color32(255, 0, 0, 255);
+            //enter[i] = p;
+
+            Debug.Log(p.startColor);
         }
         //Debug.Log("trigger");
 
