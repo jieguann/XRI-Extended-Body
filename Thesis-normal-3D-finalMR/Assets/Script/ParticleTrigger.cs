@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ParticleTrigger : MonoBehaviour
 {
+    [SerializeField] private Light pointLight;
     ParticleSystem ps;
 
     // these lists are used to contain the particles which match
@@ -30,6 +31,7 @@ public class ParticleTrigger : MonoBehaviour
             //enter[i] = p;
 
             Debug.Log(p.startColor);
+            pointLight.color = p.startColor;
         }
         //Debug.Log("trigger");
 

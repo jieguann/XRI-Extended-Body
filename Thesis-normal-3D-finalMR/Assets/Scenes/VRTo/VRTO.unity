@@ -10679,7 +10679,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1326133454
 MonoBehaviour:
@@ -10693,6 +10693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd49b7c70545a6b42a06c7eabd8b7a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointLight: {fileID: 2103269414}
 --- !u!1 &1343903958
 GameObject:
   m_ObjectHideFlags: 0
@@ -12836,7 +12837,7 @@ Transform:
   - {fileID: 1272836456}
   - {fileID: 2103269413}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1878940187
 BoxCollider:
@@ -13713,7 +13714,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0, g: 0.9444442, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.205793, b: 0, a: 1}
   m_Intensity: 20
   m_Range: 10
   m_SpotAngle: 30
