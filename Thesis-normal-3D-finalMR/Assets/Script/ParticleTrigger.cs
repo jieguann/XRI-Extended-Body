@@ -6,7 +6,9 @@ public class ParticleTrigger : MonoBehaviour
 {
     [SerializeField] private Light pointLight;
     ParticleSystem ps;
-
+    private Coroutine colorChangLight;
+    public lightControl control;
+    public triggerLight trigger;
     // these lists are used to contain the particles which match
     // the trigger conditions each frame.
     List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
@@ -32,6 +34,13 @@ public class ParticleTrigger : MonoBehaviour
 
             Debug.Log(p.startColor);
             pointLight.color = p.startColor;
+            //light control
+            if (trigger.flag == true) {
+                colorChangLight = StartCoroutine(control.HttpPutLight(p.startColor.r, p.startColor.g, p.startColor.b, p.startColor.a, true));
+
+                StopCoroutine(colorChangLight);
+            }
+            
         }
         //Debug.Log("trigger");
 

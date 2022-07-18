@@ -13,10 +13,14 @@ public class triggerLight : MonoBehaviour
     private Coroutine turnOnLight;
     private Coroutine turnOffLight;
 
-    private bool flag;
+    public bool flag;
     void Start()
     {
         flag = false;
+        turnOffLight = StartCoroutine(control.HttpPutLight(1f, 1f, 0.5f, 0, false));
+
+        StopCoroutine(turnOffLight);
+
     }
 
 
