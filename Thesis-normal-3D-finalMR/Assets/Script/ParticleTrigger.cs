@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using VLB;
 public class ParticleTrigger : MonoBehaviour
 {
     [SerializeField] private Light pointLight;
+    [SerializeField] private Light spotLight;
+    [SerializeField] private VolumetricLightBeam lightBean;
     ParticleSystem ps;
     private Coroutine colorChangLight;
     public lightControl control;
@@ -34,6 +36,8 @@ public class ParticleTrigger : MonoBehaviour
 
             Debug.Log(p.startColor);
             pointLight.color = p.startColor;
+            spotLight.color = p.startColor;
+            lightBean.color = p.startColor;
             //light control
             if (trigger.flag == true) {
                 colorChangLight = StartCoroutine(control.HttpPutLight(p.startColor.r, p.startColor.g, p.startColor.b, p.startColor.a, true));
