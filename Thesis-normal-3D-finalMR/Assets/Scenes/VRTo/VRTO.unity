@@ -1412,6 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualLight: {fileID: 2103269414}
+  lightBean: {fileID: 0}
 --- !u!1 &335989420
 GameObject:
   m_ObjectHideFlags: 0
@@ -4922,8 +4923,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   intensityFromLight: 0
   intensityModeAdvanced: 0
-  intensityInside: 1
-  intensityOutside: 1
+  intensityInside: 0.1
+  intensityOutside: 0.1
   intensityMultiplier: 1
   hdrpExposureWeight: 0
   blendingMode: 0

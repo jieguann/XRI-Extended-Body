@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using VLB;
 public class VirtualLight : MonoBehaviour
 {
     private bool flag;
     [SerializeField] private Light virtualLight;
+    [SerializeField] private VolumetricLightBeam lightBean;
     void Start()
     {
         flag = false;
@@ -17,6 +18,7 @@ public class VirtualLight : MonoBehaviour
         {
 
             virtualLight.intensity = 30;
+            lightBean.intensityGlobal = 1;
 
 
         }
@@ -24,7 +26,8 @@ public class VirtualLight : MonoBehaviour
         if (flag == false)
         {
 
-            virtualLight.intensity = 1;
+            virtualLight.intensity = 0.1f;
+            lightBean.intensityGlobal = 0;
         }
     }
 }
