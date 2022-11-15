@@ -1,14 +1,22 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
-
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
-
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
-************************************************************************************/
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * Licensed under the Oculus SDK License Agreement (the "License");
+ * you may not use the Oculus SDK except in compliance with the License,
+ * which is provided at the time of installation or download, or which
+ * otherwise accompanies this software in either electronic or hard copy form.
+ *
+ * You may obtain a copy of the License at
+ *
+ * https://developer.oculus.com/licenses/oculussdk/
+ *
+ * Unless required by applicable law or agreed to in writing, the Oculus SDK
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +30,79 @@ public class OVRCustomSkeleton : OVRSkeleton, ISerializationCallbackReceiver
 	private List<Transform> _customBones_V2;
 
 #if UNITY_EDITOR
+	private static readonly string[] _fbxBodyBoneNames =
+	{
+		"Root",
+		"Hips",
+		"SpineLower",
+		"SpineMiddle",
+		"SpineUpper",
+		"Chest",
+		"Neck",
+		"Head",
+		"LeftShoulder",
+		"LeftScapula",
+		"LeftArmUpper",
+		"LeftArmLower",
+		"LeftHandWristTwist",
+		"RightShoulder",
+		"RightScapula",
+		"RightArmUpper",
+		"RightArmLower",
+		"RightHandWristTwist",
+		"LeftHandPalm",
+		"LeftHandWrist",
+		"LeftHandThumbMetacarpal",
+		"LeftHandThumbProximal",
+		"LeftHandThumbDistal",
+		"LeftHandThumbTip",
+		"LeftHandIndexMetacarpal",
+		"LeftHandIndexProximal",
+		"LeftHandIndexIntermediate",
+		"LeftHandIndexDistal",
+		"LeftHandIndexTip",
+		"LeftHandMiddleMetacarpal",
+		"LeftHandMiddleProximal",
+		"LeftHandMiddleIntermediate",
+		"LeftHandMiddleDistal",
+		"LeftHandMiddleTip",
+		"LeftHandRingMetacarpal",
+		"LeftHandRingProximal",
+		"LeftHandRingIntermediate",
+		"LeftHandRingDistal",
+		"LeftHandRingTip",
+		"LeftHandLittleMetacarpal",
+		"LeftHandLittleProximal",
+		"LeftHandLittleIntermediate",
+		"LeftHandLittleDistal",
+		"LeftHandLittleTip",
+		"RightHandPalm",
+		"RightHandWrist",
+		"RightHandThumbMetacarpal",
+		"RightHandThumbProximal",
+		"RightHandThumbDistal",
+		"RightHandThumbTip",
+		"RightHandIndexMetacarpal",
+		"RightHandIndexProximal",
+		"RightHandIndexIntermediate",
+		"RightHandIndexDistal",
+		"RightHandIndexTip",
+		"RightHandMiddleMetacarpal",
+		"RightHandMiddleProximal",
+		"RightHandMiddleIntermediate",
+		"RightHandMiddleDistal",
+		"RightHandMiddleTip",
+		"RightHandRingMetacarpal",
+		"RightHandRingProximal",
+		"RightHandRingIntermediate",
+		"RightHandRingDistal",
+		"RightHandRingTip",
+		"RightHandLittleMetacarpal",
+		"RightHandLittleProximal",
+		"RightHandLittleIntermediate",
+		"RightHandLittleDistal",
+		"RightHandLittleTip"
+	};
 
 	private static readonly string[] _fbxHandSidePrefix = { "l_", "r_" };
 	private static readonly string _fbxHandBonePrefix = "b_";
@@ -74,6 +155,13 @@ public class OVRCustomSkeleton : OVRSkeleton, ISerializationCallbackReceiver
 				string fbxBoneName = FbxBoneNameFromBoneId(skeletonType, (BoneId)bi);
 				Transform t = transform.FindChildRecursive(fbxBoneName);
 
+				if (t == null && skeletonType == SkeletonType.Body)
+				{
+					var legacyBoneName = fbxBoneName
+						.Replace("Little", "Pinky")
+						.Replace("Metacarpal", "Meta");
+					t = transform.FindChildRecursive(legacyBoneName);
+				}
 
 				if (t != null)
 				{
@@ -85,6 +173,11 @@ public class OVRCustomSkeleton : OVRSkeleton, ISerializationCallbackReceiver
 
 	private static string FbxBoneNameFromBoneId(SkeletonType skeletonType, BoneId bi)
 	{
+		if (skeletonType == SkeletonType.Body)
+		{
+			return _fbxBodyBoneNames[(int)bi];
+		}
+		else
 		{
 			if (bi >= BoneId.Hand_ThumbTip && bi <= BoneId.Hand_PinkyTip)
 			{

@@ -1,14 +1,22 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
-
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
-
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
-************************************************************************************/
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * Licensed under the Oculus SDK License Agreement (the "License");
+ * you may not use the Oculus SDK except in compliance with the License,
+ * which is provided at the time of installation or download, or which
+ * otherwise accompanies this software in either electronic or hard copy form.
+ *
+ * You may obtain a copy of the License at
+ *
+ * https://developer.oculus.com/licenses/oculussdk/
+ *
+ * Unless required by applicable law or agreed to in writing, the Oculus SDK
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 using System;
 using UnityEngine;
@@ -57,7 +65,7 @@ namespace Oculus.Interaction
         [SerializeField]
         private int _iterations = 10;
 
-        public event Action WhenFingerLocked = delegate() { };
+        public event Action WhenFingerLocked = delegate () { };
 
         private Vector3 _saveOffset = Vector3.zero;
 
@@ -158,7 +166,7 @@ namespace Oculus.Interaction
 
         protected override void DoPostprocess()
         {
-            if(State != InteractorState.Select && _interactable != null)
+            if (State != InteractorState.Select && _interactable != null)
             {
                 _fromShadow.FromHand(Hand);
             }
@@ -184,29 +192,15 @@ namespace Oculus.Interaction
             base.DoPostprocess();
         }
 
-        public override bool ShouldSelect
+        protected override bool ComputeShouldSelect()
         {
-            get
-            {
-                if (State != InteractorState.Hover)
-                {
-                    return false;
-                }
-
-                return _candidate == _interactable && HandStatusSelecting();
-            }
+            return HandStatusSelecting();
         }
 
-        public override bool ShouldUnselect {
-            get
-            {
-                if (State != InteractorState.Select)
-                {
-                    return false;
-                }
 
+        protected override bool ComputeShouldUnselect()
+        {
                 return !HandStatusSelecting();
-            }
         }
 
         protected override void DoHoverUpdate()
@@ -239,7 +233,7 @@ namespace Oculus.Interaction
                 if (output.grabbingFingers[i] && !_fingerStatuses[i].Locked)
                 {
                     _openShadow.FromHand(OpenHand, OpenHand.Handedness != Hand.Handedness);
-                    if(!_touchShadowHand.PushoutFinger(i, _fromShadow, _openShadow,
+                    if (!_touchShadowHand.PushoutFinger(i, _fromShadow, _openShadow,
                         _interactable.ColliderGroup, output.offset))
                     {
                         continue;
@@ -302,7 +296,7 @@ namespace Oculus.Interaction
                 return;
             }
 
-            if(!_touchShadowHand.GrabConformFinger(idx, _fromShadow, _toShadow, colliderGroup, offset))
+            if (!_touchShadowHand.GrabConformFinger(idx, _fromShadow, _toShadow, colliderGroup, offset))
             {
                 return;
             }
@@ -355,7 +349,7 @@ namespace Oculus.Interaction
             }
 
             // Check if finger releases
-            if(!_touchShadowHand.GrabReleaseFinger(idx, _fromShadow, _toShadow, colliderGroup, offset))
+            if (!_touchShadowHand.GrabReleaseFinger(idx, _fromShadow, _toShadow, colliderGroup, offset))
             {
                 fingerStatus.Timer = 0f;
                 return;
@@ -501,7 +495,7 @@ namespace Oculus.Interaction
 
         protected override Pose ComputePointerPose()
         {
-            return new Pose(GrabPosition + GrabRotation*GrabOffset, GrabRotation);
+            return new Pose(GrabPosition + GrabRotation * GrabOffset, GrabRotation);
         }
 
         #region Inject

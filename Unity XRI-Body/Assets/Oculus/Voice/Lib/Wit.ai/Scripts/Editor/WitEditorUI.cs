@@ -1,5 +1,6 @@
 ﻿/*
- * Copyright (c) Facebook, Inc. and its affiliates.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * This source code is licensed under the license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +10,6 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Facebook.WitAi.Data.Configuration;
-using UnityEditor.PackageManager.UI;
 
 namespace Facebook.WitAi
 {
@@ -51,6 +50,28 @@ namespace Facebook.WitAi
         public static void LayoutKeyLabel(string key, string text)
         {
             EditorGUILayout.LabelField(key, text, WitStyles.TextField);
+        }
+        public static void LayoutKeyObjectLabels(string key, object obj)
+        {
+            // Null
+            if (obj == null)
+            {
+                LayoutKeyLabel(key, "NULL");
+                return;
+            }
+            // Foldout
+            bool foldoutVoice = WitEditorUI.LayoutFoldout(new GUIContent(key), obj);
+            if (!foldoutVoice)
+            {
+                return;
+            }
+            // Iterate fields
+            EditorGUI.indentLevel++;
+            foreach (var field in obj.GetType().GetFields())
+            {
+                LayoutKeyLabel(field.Name, field.GetValue(obj).ToString());
+            }
+            EditorGUI.indentLevel--;
         }
         #endregion
 
@@ -374,39 +395,40 @@ namespace Facebook.WitAi
 
             // Begin Header
             GUILayout.BeginVertical();
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(WitStyles.WindowPaddingLeft);
-            GUILayout.BeginVertical();
-            GUILayout.Space(WitStyles.WindowPaddingTop);
-            // Layout header image
-            if (windowHeader != null)
-            {
-                LayoutHeaderButton(windowHeader, windowHeaderUrl);
-            }
-            // Layout header label
-            if (!string.IsNullOrEmpty(windowTitle))
-            {
-                LayoutHeaderLabel(windowTitle);
-            }
-            // End Header
+                GUILayout.BeginHorizontal();
+                    GUILayout.Space(WitStyles.WindowPaddingLeft);
+                    GUILayout.BeginVertical();
+                        GUILayout.Space(WitStyles.WindowPaddingTop);
+                        // Layout header image
+                        if (windowHeader != null)
+                        {
+                            LayoutHeaderButton(windowHeader, windowHeaderUrl);
+                        }
+                        // Layout header label
+                        if (!string.IsNullOrEmpty(windowTitle))
+                        {
+                            LayoutHeaderLabel(windowTitle);
+                        }
+                        // End Header
+                    GUILayout.EndVertical();
+                    GUILayout.Space(WitStyles.WindowPaddingRight);
+                GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.Space(WitStyles.WindowPaddingRight);
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
+
             // Begin Content
             GUILayout.BeginVertical();
-            offset = GUILayout.BeginScrollView(offset);
-            GUILayout.BeginHorizontal();
-            GUILayout.Space(WitStyles.WindowPaddingLeft);
-            GUILayout.BeginVertical(GUILayout.MinWidth(minWidth), GUILayout.MaxWidth(WitStyles.WindowMaxSize));
-            // Layout content
-            windowContentLayout?.Invoke();
-            // End Content
-            GUILayout.EndVertical();
-            GUILayout.Space(WitStyles.WindowPaddingRight);
-            GUILayout.EndHorizontal();
-            GUILayout.Space(WitStyles.WindowPaddingBottom);
-            GUILayout.EndScrollView();
+                offset = GUILayout.BeginScrollView(offset);
+                    GUILayout.BeginHorizontal();
+                        GUILayout.Space(WitStyles.WindowPaddingLeft);
+                        GUILayout.BeginVertical(GUILayout.MinWidth(minWidth), GUILayout.MaxWidth(WitStyles.WindowMaxSize));
+                            // Layout content
+                            windowContentLayout?.Invoke();
+                            // End Content
+                        GUILayout.EndVertical();
+                        GUILayout.Space(WitStyles.WindowPaddingRight);
+                    GUILayout.EndHorizontal();
+                    GUILayout.Space(WitStyles.WindowPaddingBottom);
+                GUILayout.EndScrollView();
             GUILayout.EndVertical();
 
             // Return size

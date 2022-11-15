@@ -1,20 +1,27 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
-
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
-
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
-************************************************************************************/
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * Licensed under the Oculus SDK License Agreement (the "License");
+ * you may not use the Oculus SDK except in compliance with the License,
+ * which is provided at the time of installation or download, or which
+ * otherwise accompanies this software in either electronic or hard copy form.
+ *
+ * You may obtain a copy of the License at
+ *
+ * https://developer.oculus.com/licenses/oculussdk/
+ *
+ * Unless required by applicable law or agreed to in writing, the Oculus SDK
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 
 namespace Oculus.Interaction
 {
@@ -39,6 +46,10 @@ namespace Oculus.Interaction
 
         [SerializeField, Interface(typeof(ICandidateComparer)), Optional]
         private MonoBehaviour _interactorComparer;
+
+        [SerializeField, Optional]
+        private UnityEngine.Object _data = null;
+        public object Data { get; protected set; } = null;
 
         public int MaxIterationsPerFrame = 3;
         protected ICandidateComparer CandidateComparer = null;
@@ -69,6 +80,12 @@ namespace Oculus.Interaction
             if (_interactorComparer != null)
             {
                 Assert.IsNotNull(CandidateComparer);
+            }
+
+            if (Data == null)
+            {
+                _data = this;
+                Data = _data;
             }
         }
 
@@ -115,11 +132,8 @@ namespace Oculus.Interaction
 
                 if (interactor.HasCandidate)
                 {
-                    if (_candidateInteractor == null)
-                    {
-                        _candidateInteractor = interactor;
-                    }
-                    else if (Compare(_candidateInteractor, interactor) > 0)
+                    if (_candidateInteractor == null ||
+                        Compare(_candidateInteractor, interactor) > 0)
                     {
                         _candidateInteractor = interactor;
                     }
@@ -207,10 +221,10 @@ namespace Oculus.Interaction
         }
 
         public bool ShouldHover => _activeInteractor != null && _activeInteractor.ShouldHover;
-
-        public bool ShouldUnhover => _activeInteractor == null || _activeInteractor.ShouldUnhover;
+        public bool ShouldUnhover => _activeInteractor == null ||
+                                     _activeInteractor.ShouldUnhover ||
+                                     _activeInteractor != _candidateInteractor;
         public bool ShouldSelect => _activeInteractor != null && _activeInteractor.ShouldSelect;
-
         public bool ShouldUnselect => _activeInteractor == null || _activeInteractor.ShouldUnselect;
 
         private void DisableAllInteractorsExcept(IInteractor enabledInteractor)
@@ -228,7 +242,7 @@ namespace Oculus.Interaction
 
         public bool HasCandidate => _candidateInteractor != null && _candidateInteractor.HasCandidate;
 
-        public object Candidate => HasCandidate ? _candidateInteractor.Candidate : null;
+        public object CandidateProperties => HasCandidate ? _candidateInteractor.CandidateProperties : null;
 
         public bool HasInteractable => _activeInteractor != null &&
                                        _activeInteractor.HasInteractable;
@@ -253,19 +267,22 @@ namespace Oculus.Interaction
                 InteractorState previousState = _state;
                 _state = value;
 
-                WhenStateChanged(new InteractorStateChangeArgs
-                {
-                    PreviousState = previousState,
-                    NewState = _state
-                });
+                WhenStateChanged(new InteractorStateChangeArgs(
+                    previousState, _state
+                ));
             }
         }
 
         public virtual void AddInteractor(IInteractor interactor)
         {
             Interactors.Add(interactor);
-            _interactors.Add(interactor as MonoBehaviour);
             interactor.IsRootDriver = false;
+
+            MonoBehaviour interactorMono = interactor as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                _interactors.Add(interactor as MonoBehaviour);
+            }
         }
 
         public virtual void RemoveInteractor(IInteractor interactor)
@@ -274,8 +291,13 @@ namespace Oculus.Interaction
             {
                 return;
             }
-            _interactors.Remove(interactor as MonoBehaviour);
+
             interactor.IsRootDriver = true;
+            MonoBehaviour interactorMono = interactor as MonoBehaviour;
+            if (interactorMono != null)
+            {
+                _interactors.Remove(interactor as MonoBehaviour);
+            }
         }
 
         private int Compare(IInteractor a, IInteractor b)
@@ -292,7 +314,7 @@ namespace Oculus.Interaction
                     return -1;
                 }
 
-                int result = CandidateComparer.Compare(a.Candidate, b.Candidate);
+                int result = CandidateComparer.Compare(a.CandidateProperties, b.CandidateProperties);
                 return result > 0 ? 1 : -1;
             }
 
@@ -306,6 +328,11 @@ namespace Oculus.Interaction
                 return;
             }
 
+            Drive();
+        }
+
+        public void Drive()
+        {
             Preprocess();
 
             InteractorState previousState = State;
@@ -388,6 +415,12 @@ namespace Oculus.Interaction
         {
             CandidateComparer = comparer;
             _interactorComparer = comparer as MonoBehaviour;
+        }
+
+        public void InjectOptionalData(object data)
+        {
+            _data = data as UnityEngine.Object;
+            Data = data;
         }
 
         #endregion

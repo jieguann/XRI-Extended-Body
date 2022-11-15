@@ -1,15 +1,24 @@
-﻿/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
+﻿/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * Licensed under the Oculus SDK License Agreement (the "License");
+ * you may not use the Oculus SDK except in compliance with the License,
+ * which is provided at the time of installation or download, or which
+ * otherwise accompanies this software in either electronic or hard copy form.
+ *
+ * You may obtain a copy of the License at
+ *
+ * https://developer.oculus.com/licenses/oculussdk/
+ *
+ * Unless required by applicable law or agreed to in writing, the Oculus SDK
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
-
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
-************************************************************************************/
-
+using Oculus.Interaction.Grab;
 using Oculus.Interaction.HandGrab;
 using Oculus.Interaction.Input;
 using UnityEngine;
@@ -20,12 +29,10 @@ namespace Oculus.Interaction.DistanceReticles
 {
     public class ReticleGhostDrawer : InteractorReticle<ReticleDataGhost>
     {
-        [SerializeField, Interface(typeof(IHandGrabState), typeof(IInteractorView))]
-        [FormerlySerializedAs("_snapper")]
-        private MonoBehaviour _handGrabSource;
+        [SerializeField, Interface(typeof(IHandGrabber),typeof(IHandGrabState), typeof(IInteractorView))]
+        private MonoBehaviour _handGrabber;
+        private IHandGrabber HandGrabber { get; set; }
         private IHandGrabState HandGrabSource { get; set; }
-        private IInteractorView _interactor;
-        protected override IInteractorView Interactor => _interactor;
 
         [FormerlySerializedAs("_modifier")]
         [SerializeField]
@@ -37,19 +44,24 @@ namespace Oculus.Interaction.DistanceReticles
         private bool _areFingersFree = true;
         private bool _isWristFree = true;
 
+        protected override IInteractorView Interactor { get; set; }
+        protected override Component InteractableComponent => HandGrabber.TargetInteractable as Component;
+
         private ITrackingToWorldTransformer Transformer;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
-            HandGrabSource = _handGrabSource as IHandGrabState;
-            _interactor = _handGrabSource as IInteractorView;
+            HandGrabber = _handGrabber as IHandGrabber;
+            HandGrabSource = _handGrabber as IHandGrabState;
+            Interactor = _handGrabber as IInteractorView;
         }
 
         protected override void Start()
         {
-            this.BeginStart(ref _started, base.Start);
-            Assert.IsNotNull(Interactor, "Associated handGrabSource is not an InteractorView");
-            Assert.IsNotNull(HandGrabSource, "Associated handGrabSource is not an IHandGrabSource");
+            this.BeginStart(ref _started, () => base.Start());
+            Assert.IsNotNull(HandGrabber, "Associated HandGrabber Hand can not be null");
+            Assert.IsNotNull(Interactor, "Associated Interactor Hand can not be null");
+            Assert.IsNotNull(HandGrabSource, "Associated HandGrabSource can not be null");
             Assert.IsNotNull(_visualHand, "Associated Visual Hand can not be null");
             Assert.IsNotNull(_syntheticHand, "Associated Synthetic hand can not be null");
             Transformer = _syntheticHand.GetData().Config.TrackingToWorldTransformer;
@@ -105,9 +117,8 @@ namespace Oculus.Interaction.DistanceReticles
 
         private Pose GetWristPose(Pose gripPoint, Pose offset)
         {
-            Pose wristOffset = offset;
-            wristOffset.Invert();
-            gripPoint.Premultiply(wristOffset);
+            offset.Invert();
+            gripPoint.Premultiply(offset);
             return gripPoint;
         }
 
@@ -151,19 +162,20 @@ namespace Oculus.Interaction.DistanceReticles
 
         #region Inject
 
-        public void InjectAllReticleGhostDrawer(IHandGrabState handGrabSource,
+        public void InjectAllReticleGhostDrawer(IHandGrabber handGrabber,
             SyntheticHand syntheticHand, HandVisual visualHand)
         {
-            InjectHandGrabSource(handGrabSource);
+            InjectHandGrabber(handGrabber);
             InjectSyntheticHand(syntheticHand);
             InjectVisualHand(visualHand);
         }
 
-        public void InjectHandGrabSource(IHandGrabState handGrabSource)
+        public void InjectHandGrabber(IHandGrabber handGrabber)
         {
-            _handGrabSource = handGrabSource as MonoBehaviour;
-            _interactor = handGrabSource as IInteractorView;
-            HandGrabSource = handGrabSource;
+            _handGrabber = handGrabber as MonoBehaviour;
+            HandGrabber = handGrabber;
+            Interactor = handGrabber as IInteractorView;
+            HandGrabSource = handGrabber as IHandGrabState;
         }
 
         public void InjectSyntheticHand(SyntheticHand syntheticHand)

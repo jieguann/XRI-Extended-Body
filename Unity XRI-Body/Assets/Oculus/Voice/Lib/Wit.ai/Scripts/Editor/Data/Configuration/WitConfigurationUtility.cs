@@ -1,5 +1,6 @@
 ﻿/*
- * Copyright (c) Facebook, Inc. and its affiliates.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * This source code is licensed under the license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +18,6 @@ using Facebook.WitAi.Data.Traits;
 using Facebook.WitAi.Lib;
 using Facebook.WitAi.Configuration;
 using UnityEditor;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace Facebook.WitAi.Data.Configuration
@@ -133,8 +133,8 @@ namespace Facebook.WitAi.Data.Configuration
             // Return new index
             return index;
         }
-        // Save configuration after determining path
-        public static int SaveConfiguration(string serverToken, WitConfiguration configurationAsset)
+        // Get asset save directory
+        public static string GetFileSaveDirectory(string title, string fileName, string fileExt)
         {
             // Determine root directory with selection if possible
             string rootDirectory = Application.dataPath;
@@ -155,9 +155,13 @@ namespace Facebook.WitAi.Data.Configuration
                     }
                 }
             }
-
-            // Determine save path
-            string savePath = EditorUtility.SaveFilePanel(WitTexts.Texts.ConfigurationFileManagerLabel, rootDirectory, WitTexts.Texts.ConfigurationFileNameLabel, "asset");
+            // Save panel
+            return EditorUtility.SaveFilePanel(title, rootDirectory, fileName, fileExt);
+        }
+        // Save configuration after determining path
+        public static int SaveConfiguration(string serverToken, WitConfiguration configurationAsset)
+        {
+            string savePath = GetFileSaveDirectory(WitTexts.Texts.ConfigurationFileManagerLabel, WitTexts.Texts.ConfigurationFileNameLabel, "asset");
             return SaveConfiguration(savePath, serverToken, configurationAsset);
         }
         // Save configuration to selected location
@@ -359,7 +363,9 @@ namespace Facebook.WitAi.Data.Configuration
             }
             if (IsRefreshing(appID))
             {
-                RefreshDataComplete(configuration, "Already Refreshing", onRefreshComplete);
+                // Return without error if we're already refreshing. Data will get updated by the
+                // active requests.
+                RefreshDataComplete(configuration, "", onRefreshComplete);
                 return;
             }
             if (!IsClientTokenValid(configuration.clientAccessToken))
@@ -456,7 +462,7 @@ namespace Facebook.WitAi.Data.Configuration
         private static void PerformRequest(WitRequest request, Action<WitResponseNode, Action<string>> onApply, Action<string> onComplete)
         {
             // Add response delegate
-            request.onResponse = (response) =>
+            request.onResponse += (response) =>
             {
                 // Get status
                 int status = response.StatusCode;
@@ -474,7 +480,7 @@ namespace Facebook.WitAi.Data.Configuration
                         // Apply failed
                         if (!string.IsNullOrEmpty(error))
                         {
-                            onComplete?.Invoke($"Request Set Failed: {status}\nPath: {request}\nError: {error}");
+                            onComplete?.Invoke($"Request Failed: {error}\nStatus: {status}\nPath: {request}");
                         }
                         // Complete
                         else
@@ -494,6 +500,7 @@ namespace Facebook.WitAi.Data.Configuration
         private static void ApplyAllApplicationData(string serverToken, WitResponseNode witResponse, Action<string> onComplete)
         {
             var applications = witResponse.AsArray;
+            bool foundApp = false;
             for (int i = 0; i < applications.Count; i++)
             {
                 // Get application
@@ -503,6 +510,7 @@ namespace Facebook.WitAi.Data.Configuration
                 if (applications[i]["is_app_for_token"].AsBool)
                 {
                     WitAuthUtility.SetAppServerToken(appID, serverToken);
+                    foundApp = true;
                 }
                 // Apply to configuration
                 int witConfigIndex = Array.FindIndex(WitConfigs, (configuration) => string.Equals(appID, configuration?.application?.id));
@@ -514,7 +522,17 @@ namespace Facebook.WitAi.Data.Configuration
                     configuration.RefreshData();
                 }
             }
-            onComplete("");
+
+            if (foundApp)
+            {
+                onComplete("");
+            }
+            else
+            {
+                var error = "No application with this server token could be found.";
+                onComplete(error);
+                Log(error, true);
+            }
         }
         // Apply application data
         private static void ApplyApplicationData(WitConfiguration configuration, WitResponseNode witResponse, Action<string> onComplete)
@@ -538,7 +556,7 @@ namespace Facebook.WitAi.Data.Configuration
                     return;
                 }
             }
-            onComplete?.Invoke("No applicable configuration application found");
+            onComplete?.Invoke("Could not find an application associated with the provided tokens.");
         }
         // Apply client id
         private static void ApplyClientToken(WitConfiguration configuration, WitResponseNode witResponse, Action<string> onComplete)
@@ -623,12 +641,12 @@ namespace Facebook.WitAi.Data.Configuration
         // Log
         private static void Log(string comment, bool error)
         {
-            #if VERBOSE_LOG
             string l = "Wit Configuration Utility - " + comment;
             if (error)
             {
                 Debug.LogError(l);
             }
+            #if VERBOSE_LOG
             else
             {
                 Debug.Log(l);
