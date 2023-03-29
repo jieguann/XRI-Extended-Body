@@ -2,7 +2,7 @@
 
 VRTO 2022
 
-IEEE Gem 2022
+J. Guan and A. Morris, "Extended-XRI Body Interfaces for Hyper-Connected Metaverse Environments," 2022 IEEE Games, Entertainment, Media Conference (GEM), St. Michael, Barbados, 2022, pp. 1-6, doi: 10.1109/GEM56474.2022.10017701.
 
 
 https://user-images.githubusercontent.com/60665347/195522624-006d5e80-f2d8-405f-b116-eaa74ef43bca.mp4
